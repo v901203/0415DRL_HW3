@@ -64,3 +64,23 @@ python hw3_2_advanced_dqn.py
 # Run PyTorch Lightning DQN
 python hw3_3_lightning_dqn.py
 ```
+
+---
+
+## 💬 Development Log & Interaction Process
+**How we arrived at these results step-by-step:**
+
+- ❓ **Step 1: Clarifying the Assignment**
+  The process began by reviewing the homework instructions. An implementation plan was created, raising critical questions: `"Where is the updated starter code?"` and `"Should we convert the model to Keras or PyTorch Lightning?"`
+
+- ⚙️ **Step 2: Environment Setup**
+  To proceed efficiently, we cloned the original `DeepReinforcementLearningInAction` repository as the baseline, extracting the `Gridworld` environment and installing missing dependencies (`torch`, `pytorch-lightning`).
+
+- 💻 **Step 3: Step-by-Step Implementation**
+  We systematically built the models in three separate Python scripts:
+  - **HW3-1:** `hw3_1_naive_dqn.py` (Online Naive DQN vs Experience Replay)
+  - **HW3-2:** `hw3_2_advanced_dqn.py` (Double DQN & Dueling DQN)
+  - **HW3-3:** `hw3_3_lightning_dqn.py` (PyTorch Lightning with Huber Loss, LR Scheduler, Gradient Clipping)
+
+- 📊 **Step 4: Generating Results & Documentation**
+  Finally, we wrote an automated script to train all models for 500 epochs, captured their loss curves, and constructed a dynamic webpage (`index.html`) to visually document the understanding report and training results.

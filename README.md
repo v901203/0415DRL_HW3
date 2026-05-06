@@ -2,6 +2,13 @@
 
 This repository contains the implementation of Deep Q-Networks (DQN) and several of its advanced variants, applied to a Gridworld environment.
 
+## 📊 Results Showcase
+We have provided an interactive HTML showcase of the training processes and loss curves.
+You can view the full documentation and plotted results by opening our live webpage:
+👉 **[Interactive Results Webpage](https://v901203.github.io/0415DRL_HW3/)**
+
+---
+
 ## 🚀 Overview & Results
 
 ### ❓ Q1: HW3-1 Naive DQN for static mode
@@ -83,7 +90,4 @@ python hw3_3_lightning_dqn.py
   - **HW3-3:** `hw3_3_lightning_dqn.py` (PyTorch Lightning with Huber Loss, LR Scheduler, Gradient Clipping)
 
 - 📊 **Step 4: Generating Results & Documentation**
-## 📊 Results Showcase
-We have provided an interactive HTML showcase of the training processes and loss curves.
-You can view the full documentation and plotted results by opening our live webpage:
-👉 **[Interactive Results Webpage](https://v901203.github.io/0415DRL_HW3/)**
+  Finally, we wrote an automated script to train all models for 500 epochs, captured their loss curves, and constructed a dynamic webpage (`index.html`) to visually document the understanding report and training results.

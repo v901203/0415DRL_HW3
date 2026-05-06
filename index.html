@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DQN Homework Results</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blob blob-1"></div>
+    <div class="background-blob blob-2"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Homework 3 <span class="gradient-text">DQN & Variants</span></h1>
+            <p class="subtitle">Q&A and Results Showcase</p>
+        </header>
+
+        <!-- Q1 -->
+        <section class="card glass">
+            <h2>❓ Q1: HW3-1 Naive DQN for static mode</h2>
+            <div class="qa-block">
+                <div class="q-section">
+                    <strong>📝 Question / Task:</strong><br>
+                    Run the provided code naive or Experience buffer reply. Chat with ChatGPT about the code to clarify your understanding. Submit a short understanding report.
+                </div>
+                <div class="a-section">
+                    <strong>💡 A1 (Understanding Report):</strong><br>
+                    <p>In <code>static</code> mode, all objects are fixed. The state is represented as a flattened 64-dimensional array.</p>
+                    <ul>
+                        <li><strong>Naive DQN:</strong> Trains strictly online. Since consecutive frames are highly correlated, the learning process oscillates heavily and struggles to stabilize.</li>
+                        <li><strong>Experience Replay:</strong> Solves instability by storing past experiences in a buffer and sampling mini-batches randomly. This breaks temporal correlation, drastically improving the smoothness and convergence of the loss curve.</li>
+                    </ul>
+                </div>
+                <div class="result-section">
+                    <strong>📊 Result 1:</strong><br>
+                    <div class="content-grid" style="margin-top: 1rem;">
+                        <div class="image-wrapper">
+                            <img src="static/images/naive_dqn_loss.png" alt="Naive DQN Loss">
+                            <p style="text-align:center; font-size:0.9em; margin-top:5px; padding-bottom:10px;">Naive DQN Loss</p>
+                        </div>
+                        <div class="image-wrapper">
+                            <img src="static/images/er_dqn_loss.png" alt="ER DQN Loss">
+                            <p style="text-align:center; font-size:0.9em; margin-top:5px; padding-bottom:10px;">Experience Replay DQN Loss</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Q2 -->
+        <section class="card glass">
+            <h2>❓ Q2: HW3-2 Enhanced DQN Variants for player mode</h2>
+            <div class="qa-block">
+                <div class="q-section">
+                    <strong>📝 Question / Task:</strong><br>
+                    Implement and compare Double DQN and Dueling DQN. Focus on how they improve upon the basic DQN approach.
+                </div>
+                <div class="a-section">
+                    <strong>💡 A2 (Improvements Explanation):</strong><br>
+                    <ul>
+                        <li><strong>Double DQN:</strong> Basic DQN suffers from overestimation bias because it uses the same network to select and evaluate actions. Double DQN decouples this: it uses the Main Network to select the action and the Target Network to evaluate it, yielding more accurate Q-values.</li>
+                        <li><strong>Dueling DQN:</strong> Splits the network into a Value stream (how good the state is generally) and an Advantage stream (how much better an action is compared to others). This allows the network to learn which states are valuable without having to learn the effect of each action for every single state.</li>
+                    </ul>
+                </div>
+                <div class="result-section">
+                    <strong>📊 Result 2:</strong><br>
+                    <div class="content-grid" style="margin-top: 1rem;">
+                        <div class="image-wrapper">
+                            <img src="static/images/double_dqn_loss.png" alt="Double DQN Loss">
+                            <p style="text-align:center; font-size:0.9em; margin-top:5px; padding-bottom:10px;">Double DQN Loss</p>
+                        </div>
+                        <div class="image-wrapper">
+                            <img src="static/images/dueling_dqn_loss.png" alt="Dueling DQN Loss">
+                            <p style="text-align:center; font-size:0.9em; margin-top:5px; padding-bottom:10px;">Dueling DQN Loss</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Q3 -->
+        <section class="card glass">
+            <h2>❓ Q3: HW3-3 Enhance DQN for random mode WITH Training Tips</h2>
+            <div class="qa-block">
+                <div class="q-section">
+                    <strong>📝 Question / Task:</strong><br>
+                    Convert the DQN model from PyTorch to either Keras or PyTorch Lightning. Bonus points for integrating training techniques to stabilize/improve learning.
+                </div>
+                <div class="a-section">
+                    <strong>💡 A3 (Implementation & Tips):</strong><br>
+                    <p>We converted the model to <strong>PyTorch Lightning</strong> (<code>LitDQN</code> class) for the hardest <code>random</code> environment. To stabilize training in this chaotic mode, we integrated:</p>
+                    <ul class="feature-list" style="margin-top: 1rem;">
+                        <li><span class="icon">✨</span> <strong>Huber Loss:</strong> Replaced MSE with <code>nn.SmoothL1Loss()</code> to prevent exploding gradients when rewards fluctuate wildly.</li>
+                        <li><span class="icon">📉</span> <strong>Learning Rate Scheduling:</strong> Added <code>StepLR</code> to gradually decay the learning rate, helping the model fine-tune its policy as it converges.</li>
+                        <li><span class="icon">✂️</span> <strong>Gradient Clipping:</strong> Set <code>gradient_clip_val=1.0</code> in the Trainer to ensure updates remain within a stable bound.</li>
+                    </ul>
+                </div>
+                <div class="result-section">
+                    <strong>📊 Result 3:</strong><br>
+                    <p style="color:var(--text-main); margin-top:10px;">The PyTorch Lightning model successfully encapsulated the training loop. By applying these tips, the model avoided catastrophic forgetting in the <code>random</code> environment where all objects (Player, Goal, Pit, Wall) spawn arbitrarily, successfully converging across epochs.</p>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+</body>
+</html>

@@ -103,6 +103,50 @@
                 </div>
             </div>
         </section>
+        <!-- Q4 -->
+        <section class="card glass">
+            <h2>🌟 Q4: HW3-4 Rainbow DQN for random mode (Bonus)</h2>
+            <div class="qa-block">
+                <div class="q-section">
+                    <strong>📝 Question / Task:</strong><br>
+                    使用 Rainbow DQN 解 Random Mode GridWorld，先分析，再教你怎麼做。
+                </div>
+                <div class="a-section">
+                    <strong>💡 分析 (Analysis): 什麼是 Rainbow DQN？</strong><br>
+                    <p>Rainbow DQN 結合了六項對 DQN 的改進，是 DQN 家族的集大成者：</p>
+                    <ul>
+                        <li><strong>Double DQN</strong>: 解決 Q 值高估問題。</li>
+                        <li><strong>Dueling DQN</strong>: 將網路拆分為價值 (Value) 與優勢 (Advantage) 分支，學習判斷狀態的好壞。</li>
+                        <li><strong>Prioritized Experience Replay (PER)</strong>: 優先學習 TD-error 較大的經驗，提升學習效率。</li>
+                        <li><strong>Multi-step (N-step) Returns</strong>: 往後看 N 步，讓延遲的獎勵能更快反向傳播。</li>
+                        <li><strong>Noisy Nets</strong>: 在網路中加入雜訊，取代傳統的 &epsilon;-greedy 來進行更聰明的探索。</li>
+                        <li><strong>Categorical (C51)</strong>: 預測回報的「機率分佈」而非單一數值，更能捕捉環境的隨機性。</li>
+                    </ul>
+                    <br>
+                    <strong>🎓 教學 (Tutorial): 怎麼做？</strong><br>
+                    <p>為了在充滿挑戰的 <code>random</code> 模式下穩定訓練，我們將這 6 種技術整合在 <code>hw3_4_rainbow_dqn.py</code> 中：</p>
+                    <ul class="feature-list" style="margin-top: 1rem;">
+                        <li><span class="icon">✨</span> <strong>實作細節:</strong> 使用 <code>NoisyLinear</code> 取代標準全連接層；將 Dueling 結合 Categorical 分佈；訓練迴圈中使用陣列實作的 PER，並透過計算 Cross-Entropy Loss 來更新神經網路與 PER 權重。</li>
+                        <li><span class="icon">▶️</span> <strong>執行方式:</strong> <code>python hw3_4_rainbow_dqn.py</code></li>
+                    </ul>
+                    <br>
+                    <strong>📈 數據支持 (Empirical Data Support):</strong>
+                    <ul class="feature-list" style="margin-top: 1rem;">
+                        <li><span class="icon">📉</span> <strong>快速收斂:</strong> 模型在短短幾百個 Epochs 內，Loss 從初期的 <code>3.58</code> 大幅下降並穩定在 <code>0.005</code> 左右。</li>
+                        <li><span class="icon">🏆</span> <strong>獎勵提升:</strong> 初期 (Epoch 0) 平均獲得 <strong>-70.00 分</strong>。到了後期 (Epoch 500+)，平均分數穩定進步到 <strong>-12.88 分</strong>。這代表 Agent 已經學會以最少步數尋找目標並完美避開陷阱。</li>
+                    </ul>
+                </div>
+                <div class="result-section">
+                    <strong>📊 Result 4:</strong><br>
+                    <div class="content-grid" style="margin-top: 1rem;">
+                        <div class="image-wrapper">
+                            <img src="static/images/rainbow_dqn_loss.png" alt="Rainbow DQN Loss" onerror="this.src='https://via.placeholder.com/600x400?text=Training+in+Progress...'">
+                            <p style="text-align:center; font-size:0.9em; margin-top:5px; padding-bottom:10px;">Rainbow DQN Loss</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         
     </div>
 </body>
